@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For You ❤️</title>
+<style>
+    body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: url("bg.jpg") no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+    text-align: center;
+}
+
+#main, #login {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 20px;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    filter: blur(8px);
+    z-index: -1;
+}
+
+    .center {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    input {
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 10px;
+        border: none;
+        margin-top: 10px;
+    }
+
+    button {
+        padding: 10px 20px;
+        margin-top: 10px;
+        border: none;
+        border-radius: 10px;
+        background: pink;
+        cursor: pointer;
+    }
+
+    #main {
+        display: none;
+        padding: 40px;
+        animation: fadeIn 2s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    .hidden-message {
+        display: none;
+        margin-top: 20px;
+    }
+
+    #hearts-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    }
+
+    .heart {
+    position: absolute;
+    color: pink;
+    font-size: 20px;
+    animation: floatUp 3s linear forwards;
+    }
+
+    @keyframes floatUp {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh);
+        opacity: 0;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="center" id="login">
+    <h2>🔐 Enter the password</h2>
+    <input type="password" id="password" placeholder="Hint: our first date spot 💭">
+    <button onclick="checkPassword()">Unlock</button>
+    <p id="error" style="color:red;"></p>
+</div>
+
+<div id="main">
+    <h1>Happy Birthday ❤️</h1>
+    <p>I made this just for you…</p>
+
+    <button onclick="reveal()">Click to reveal 💌</button>
+
+    <div class="hidden-message" id="message">
+        <p>
+            I know we've had our differences and I can be hard to love or
+            be in a relationship with but know I love you the most and I
+            would do anything and everything I can to be the man of your
+            dreams, You’re not just special… you’re my favorite part of everyday.  
+            Even when we’re far, you’re the closest person to my heart. 
+            and I'll love you always and all ways  
+        </p>
+
+        <p>
+            I wish I could be there with you right now,  
+            but for now… this is my way of holding you a little closer.
+            (made this from scratch btw)  
+        </p>
+
+        <p>
+            And only you were meant to find this Pahelu ❤️
+            I can’t wait for the day I celebrate this with you in person.
+            Happy Birthday my love 💌
+        </p>
+            
+           <p>Tap this… I made something for you 🎥❤️</p>
+
+           <button id="surpriseBtn" onclick="showHearts()" 
+           style="padding:15px 25px; border-radius:12px; background:pink; border:none; font-size:16px; cursor:pointer; opacity:0; transform:translateY(20px); transition:all 1s;">
+               ▶️ Watch your surprise
+           </button>
+
+           <div id="hearts-container"></div>
+    
+       </div>
+
+
+<!-- Optional background music -->
+<audio id="music" loop>
+    <source src="https://www2.cs.uic.edu/~i101/SoundFiles/StarWars60.wav" type="audio/wav">
+</audio>
+
+<script>
+    const correctPassword = "khan market"; // CHANGE THIS
+
+    function checkPassword() {
+        const input = document.getElementById("password").value;
+
+        if (input === correctPassword) {
+            document.getElementById("login").style.display = "none";
+            document.getElementById("main").style.display = "block";
+
+            document.getElementById("music").play();
+        } else {
+            document.getElementById("error").innerText = "Wrong password 💔";
+        }
+    }
+
+    function reveal() {
+    document.getElementById("message").style.display = "block";
+
+    // animate button appearance
+    setTimeout(() => {
+        const btn = document.getElementById("surpriseBtn");
+        btn.style.opacity = "1";
+        btn.style.transform = "translateY(0)";
+        }, 500);
+    }
+
+function showHearts() {
+    const container = document.getElementById("hearts-container");
+
+    for (let i = 0; i < 25; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "💖";
+
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.top = "80vh";
+
+        container.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 3000);
+    }
+
+    // open video after hearts animation
+    setTimeout(() => {
+        window.open("https://www.youtube.com/watch?v=1XMCQHt_Z2E", "_blank");
+        }, 1200);
+    }
+</script>
+
+</body>
+</html>
